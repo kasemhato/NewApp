@@ -1,0 +1,32 @@
+<html>
+	<head>
+		<title> Choose City </title>
+	</head>
+	
+	<body>
+		<h1>Choose City</h1>
+		
+		<form action='/viewRes' method = "post">
+			<p>
+				<ul>
+					{% for c in cities %}
+    					<li>
+    					{{c.name}}
+    					</li>
+					{% endfor %}
+				</ul>
+				<select name="city">
+					{% for c in cities %}
+    					<option value = "{{c.getKey}}">
+    					{{c.name}}
+    					</option>
+					{% endfor %}
+				</select>
+			</p>
+			<input type="submit" name="continue" value="Choose City">
+		</form>
+		<form action='/firstPage' method = "post">
+			<input type="submit" name="z" value="back">
+		</form>
+	</body>
+</html>

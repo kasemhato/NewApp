@@ -1,0 +1,18 @@
+<html>
+	<head>
+		<title> Choose City </title>
+	</head>
+	
+	<body>
+		<h2>These are the restaurants available in {{ city.name }} :</h2>
+		<br>
+		<ul>
+			{% for r in restaurants %}
+    			<li>
+    			{{r.name}}
+    			</li>
+			{% endfor %}
+		</ul>
+		
+	</body>
+</html>

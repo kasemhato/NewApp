@@ -1,0 +1,23 @@
+application: newappmyapp
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: yes
+
+handlers:
+
+- url: /firstPage
+  script: application.app
+
+- url: /chooseCity
+  script: application.app
+
+- url: /viewRes
+  script: application.app
+
+- url: /.*
+  script: main.app
+
+libraries:
+- name: webapp2
+  version: "2.5.2"
