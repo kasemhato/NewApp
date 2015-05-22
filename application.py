@@ -30,6 +30,7 @@ class ChooseCityPage(webapp2.RequestHandler):
         password = self.request.get('password')
         q = db.Query(Admin)
         q.filter('name =',name)
+        user = Admin()
         for x in q:
             user = x
 
