@@ -6,13 +6,16 @@ threadsafe: yes
 
 handlers:
 
-- url: /firstPage
+- url: /logIn
   script: application.app
 
 - url: /chooseCity
   script: application.app
 
 - url: /viewRes
+  script: application.app
+
+- url: /addCity
   script: application.app
 
 - url: /.*

@@ -9,19 +9,19 @@ from google.appengine.ext.webapp import template
 from initInfo import *
 
 
-class firstPageClass(webapp2.RequestHandler):
+class logInPage(webapp2.RequestHandler):
     def get(self):
         init()
 
-        file = os.path.join(os.path.dirname(__file__), 'firstPage.html')
+        file = os.path.join(os.path.dirname(__file__), 'logIn.html')
 
         self.response.out.write(template.render(file, None))
 
 
     def post(self):
-        file = os.path.join(os.path.dirname(__file__), 'firstPage.html')
+        file = os.path.join(os.path.dirname(__file__), 'logIn.html')
 
-        self.response.out.write(template.render(file, None))
+        self.response.out.write(dtemplate.render(file, None))
 
 
 class ChooseCityPage(webapp2.RequestHandler):
@@ -31,6 +31,12 @@ class ChooseCityPage(webapp2.RequestHandler):
         context = {
             'cities': cities
         }
+        self.response.out.write(template.render(file, context))
+
+class addCityPage(webapp2.RequestHandler):
+    def post(self):
+        file = os.path.join(os.path.dirname(__file__), 'addCity.html')
+        
         self.response.out.write(template.render(file, context))
 
 class ViewRestaurants(webapp2.RequestHandler):
@@ -50,6 +56,7 @@ class ViewRestaurants(webapp2.RequestHandler):
 
 
 
-app = webapp2.WSGIApplication([('/firstPage', firstPageClass), \
+app = webapp2.WSGIApplication([('/logIn', logInPage), \
                                ('/chooseCity', ChooseCityPage), \
-                               ('/viewRes', ViewRestaurants)], debug=True)
+                               ('/viewRes', ViewRestaurants), \
+                               ('/addCity', addCityPage)], debug=True)
