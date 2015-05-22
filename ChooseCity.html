@@ -25,9 +25,9 @@
 			</p>
 			<input type="submit" name="continue" value="Choose City">
 		</form>
-		{% if admin : %}
+		{% if admin %}
 		<form action='/addCity' method = "post">
-			<input type="submit" name="z" value="back">
+			<input type="submit" name="addCity" value="Add City">
 		</form>
 		{% endif %}
 		<form action='/logIn' method = "post">
