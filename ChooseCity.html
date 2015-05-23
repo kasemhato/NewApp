@@ -5,6 +5,9 @@
 	
 	<body>
 		<h1>Choose City</h1>
+		{% if isAdmin %}
+		<p>You are logged in as admin<p>
+		{% endif %}
 		
 		<form action='/viewRes' method = "post">
 			<p>
@@ -25,7 +28,7 @@
 			</p>
 			<input type="submit" name="continue" value="Choose City">
 		</form>
-		{% if admin %}
+		{% if isAdmin %}
 		<form action='/addCity' method = "post">
 			<input type="submit" name="addCity" value="Add City">
 		</form>

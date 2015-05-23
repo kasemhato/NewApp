@@ -7,7 +7,10 @@ from classes import *
 import os
 from google.appengine.ext.webapp import template
 from initInfo import *
+from gaesessions import  get_current_session
 
+
+isAdmin = False
 
 class logInPage(webapp2.RequestHandler):
     def get(self):
@@ -26,24 +29,12 @@ class logInPage(webapp2.RequestHandler):
 
 class ChooseCityPage(webapp2.RequestHandler):
     def post(self):
-        name = self.request.get('username')
-        password = self.request.get('password')
-        q = db.Query(Admin)
-        q.filter('name =',name)
-        user = Admin()
-        for x in q:
-            user = x
-
-        admin = False
-
-        if user.name == name and user.password == password:
-            admin = True
 
         cities = City.all()
-
+        
         file = os.path.join(os.path.dirname(__file__), 'ChooseCity.html')
         context = {
-            'admin' : admin,
+            'isAdmin' : isAdmin(self),
             'cities': cities
         }
         self.response.out.write(template.render(file, context))
@@ -51,8 +42,20 @@ class ChooseCityPage(webapp2.RequestHandler):
 class addCityPage(webapp2.RequestHandler):
     def post(self):
         file = os.path.join(os.path.dirname(__file__), 'addCity.html')
-        
         self.response.out.write(template.render(file, None))
+
+class cityAddedPage(webapp2.RequestHandler):
+    def post(self):
+        name = self.request.get('cityname')
+        c = City()
+        c.name = name
+        c.put()
+
+        file = os.path.join(os.path.dirname(__file__), 'cityAdded.html')
+        context = {
+            'city' : c
+        }
+        self.response.out.write(template.render(file, context))
 
 class ViewRestaurants(webapp2.RequestHandler):
     def post(self):
@@ -69,9 +72,23 @@ class ViewRestaurants(webapp2.RequestHandler):
         }
         self.response.out.write(template.render(file, context))
 
+def isAdmin(self):
+    name = self.request.get('username')
+    password = self.request.get('password')
+    q = db.Query(Admin)
+    q.filter('name =',name)
+    user = Admin()
+    for x in q:
+        user = x
+    isAdmin = False
+    if user.name == name and user.password == password:
+        isAdmin = True
+    return isAdmin
+
 
 
 app = webapp2.WSGIApplication([('/logIn', logInPage), \
                                ('/chooseCity', ChooseCityPage), \
                                ('/viewRes', ViewRestaurants), \
-                               ('/addCity', addCityPage)], debug=True)
+                               ('/addCity', addCityPage), \
+                               ('/cityAdded', cityAddedPage)], debug=True)

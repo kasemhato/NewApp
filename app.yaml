@@ -17,6 +17,9 @@ handlers:
 
 - url: /addCity
   script: application.app
+  
+- url: /cityAdded
+  script: application.app
 
 - url: /.*
   script: main.app
