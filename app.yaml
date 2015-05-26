@@ -14,6 +14,21 @@ handlers:
 
 - url: /viewRes
   script: application.app
+  
+- url: /addRes
+  script: application.app
+  
+- url: /RestaurantAdded
+  script: application.app
+  
+- url: /Restaurant
+  script: application.app
+  
+- url: /Comment
+  script: application.app
+
+- url: /SignOut
+  script: application.app
 
 - url: /addCity
   script: application.app

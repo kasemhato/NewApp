@@ -1,18 +1,58 @@
 <html>
 	<head>
-		<title> Choose City </title>
+		<title> Restaurants : {{ city.name }} </title>
 	</head>
 	
 	<body>
-		<h2>These are the restaurants available in {{ city.name }} :</h2>
-		<br>
-		<ul>
-			{% for r in restaurants %}
-    			<li>
-    			{{r.name}}
-    			</li>
-			{% endfor %}
-		</ul>
+	{% if restaurants.get %}
+	    <h2> These are the restaurants available in {{ city.name }} : </h2>
+		<form action='/Restaurant' method = "post">	
+		<table border="1" style="width:50%">
 		
+            <tr>
+                <td><strong>Restaurant</strong></td>
+                <td><strong>Speciality</strong></td>
+                <td><strong>Price Range</strong></td>
+            </tr>
+            {% for r in restaurants %}
+			<tr>
+                <td>{{r.name}}</td>
+                <td>{{r.speciality}}</td>
+                <td>{{r.prices}}</td>
+            </tr>
+			{% endfor %}
+        </table>
+		<br>
+		<br>
+		
+		<select name = 'restaurant'>
+			{% for r in restaurants %}
+			<option value = "{{r.getKey}}">
+			{{r.name}}
+			</option>
+			{% endfor %}
+		</select>
+		<br>
+		<br>
+		
+		<input type="submit" name="continue" value="Choose Restaurant">	
+		</form>
+	{% else %}
+		<p><font size = "5" color="grey"> {{city.name}} has no restaurants added, that's really sad, you're going to die :( </font><p>
+	{% endif %}
+	
+	{% if isAdmin %}
+		<form action='/addRes' method = "post">
+			<input type="submit" name="addRes" value="Add Restaurant">
+		</form>
+	{% endif %}
+	<form action='/chooseCity' method = "post">
+		<input type="submit" name="c" value="back">
+	</form>
+
+	
+	
+	
 	</body>
+	
 </html>

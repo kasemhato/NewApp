@@ -1,0 +1,38 @@
+<html>
+	<head>
+		<title> Add Restaurant </title>
+	</head>
+	
+	<body>
+		<h2>Add a new restaurant :</h2>
+		<br>
+		<form action = "/RestaurantAdded" method = "post">
+			<label for = "resName">Name : </label>
+			<input name = "resName" type = "text" value="">
+			
+			<label for = "resAddress">Address : </label>
+			<input name = "resAddress" type = "text" value="">
+			
+			<label for = "resSpecial">Speciality : </label>
+			<input name = "resSpecial" type = "text" value="">
+			
+			<label for = "resPhone">Phone Number : </label>
+			<input name = "resPhone" type = "text" value="">
+			
+			<label for = "resPrice">Prices Range : </label>
+			<input name = "resPrice" type = "text" value=""><br><br>
+			
+			<label for = "city">City : </label>
+			<select name="city">
+					{% for c in cities %}
+    					<option value = "{{c.getKey}}">
+    					{{c.name}}
+    					</option>
+					{% endfor %}
+			</select><br><br>
+			
+			<input name = "addRestaurantButton" type = "submit" value="Add Restaurant">
+		</form>
+		
+	</body>
+</html>

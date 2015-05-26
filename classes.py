@@ -9,6 +9,7 @@ class Admin(db.Model):
     def getKey(self):
         return self.key()
 
+
 class City(db.Model):
     name = db.StringProperty()
 
@@ -19,15 +20,19 @@ class City(db.Model):
 class Restaurant(db.Model):
     name = db.StringProperty()
     address = db.StringProperty()
-    city = db.ReferenceProperty(City, collection_name = 'restaurants')
-    
+    speciality = db.StringProperty()
+    phone = db.StringProperty()
+    prices = db.StringProperty()
+    city = db.ReferenceProperty(City, collection_name='restaurants')
+
     def getKey(self):
         return self.key()
 
-class Comments(db.Model):
+
+class MyComments(db.Model):
     user = db.StringProperty()
     comment = db.StringProperty()
-    restaurant = db.ReferenceProperty(Restaurant, collection_name = 'comments')
+    restaurant = db.ReferenceProperty(Restaurant, collection_name='comments')
 
     def getKey(self):
         return self.key()

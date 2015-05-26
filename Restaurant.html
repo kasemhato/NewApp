@@ -1,0 +1,50 @@
+<html>
+	<head>
+		<title> Info : {{restaurant.name}}	</title>
+	</head>
+	
+	<body>
+	<h1> {{restaurant.name}} </h1>
+	
+	<p> City : {{restaurant.city.name}}
+	<p> Speciality : {{restaurant.speciality}}</p>
+	<p> Prices : {{restaurant.prices}} </p>
+	<br>
+	<h3> Contact Info : </h3>
+	<p> Address : {{restaurant.address}}</p>
+	<p> Phone Number: {{restaurant.phone}}</p>
+	<br>
+	
+	{% if comments.get %}
+	<h3>Comments</h3>
+	<ol>
+	{% for c in comments %}
+	 <li> 
+	 	<p> <b>Name: </b>{{c.user}}</p> 
+	 	<p> <b>comment:</b> {{c.comment}} </p>
+	 </li>
+	{% endfor %}
+	</ol>
+	<br>
+	{% else %}
+	<p><font size = "5" color="grey"> No comments to view, be the first to comment! </font><p>
+	{% endif %}
+	
+	<form action='/Comment' method = "post">
+		<label for = "user"><strong>Name :     </strong></label>
+		<input name = "user" type = "text" value=""><br>
+		
+		<label for = "comment"><strong>Comment : </strong></label>
+		<input name = "comment" type = "text" value=""><br>
+		
+		<input type="hidden" name="restaurant" value="{{restaurant.getKey}}">
+		<input type="submit" name="continue" value="Add a Comment">	
+	</form>
+	
+	<form action='/viewRes' method = "post">
+		<input type="hidden" name="city" value="{{restaurant.city.getKey}}">
+		<input type="submit" value="back">
+	</form>
+
+	</body>	
+</html>
