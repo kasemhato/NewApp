@@ -110,7 +110,6 @@ class RestaurantPage(webapp2.RequestHandler):
 
 class AddRestaurantPage(webapp2.RequestHandler):
     def post(self):
-        name = self.request.get('city')
         cities = db.Query(City)
         file = os.path.join(os.path.dirname(__file__), 'addRestaurant.html')
         context = {
